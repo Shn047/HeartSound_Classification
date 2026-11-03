@@ -13,7 +13,7 @@ A course project that classifies heart sound recordings as *normal* or *abnormal
 
 ## Results and what I learned
 
-The course version reported about **82% accuracy**. When I later re-audited the notebook, I found two problems in how it was evaluated:
+The original course run reported about **82% accuracy**; re-running the course notebook (`HeartSound_Course.ipynb`) gives **79%** on its final evaluation and **70.5% ± 8.3%** in 5-fold cross-validation, since results vary between runs. When I later re-audited the notebook, I found two problems in how it was evaluated:
 
 1. **Augmentation leakage.** Abnormal recordings were augmented *before* the train/test split, so test data contained altered audio and the model could learn "altered audio = abnormal".
 2. **Patient leakage.** Each patient has several recordings, and the random split put recordings from the same patient in both training and testing.
