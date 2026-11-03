@@ -18,7 +18,7 @@ The course version reported about **82% accuracy**. When I later re-audited the 
 1. **Augmentation leakage.** Abnormal recordings were augmented *before* the train/test split, so test data contained altered audio and the model could learn "altered audio = abnormal".
 2. **Patient leakage.** Each patient has several recordings, and the random split put recordings from the same patient in both training and testing.
 
-After fixing both (augmenting the training data only, and splitting by **patient** with `StratifiedGroupKFold`), performance on unseen patients dropped to about **chance level**. In other words, this model does not reliably predict the clinical outcome from short recordings.
+After fixing both in `HeartSound_Reaudit.ipynb` (augmenting the training data only, and splitting by **patient** with `StratifiedGroupKFold`), performance on unseen patients dropped to about **chance level** (around 50% accuracy). In other words, this model does not reliably predict the clinical outcome from short recordings.
 
 **Key lessons:**
 - Evaluate at the right level: split by **patient**, not by recording, whenever one patient has several samples.
@@ -29,7 +29,8 @@ After fixing both (augmenting the training data only, and splitting by **patient
 
 | File | Description |
 |---|---|
-| `ML_Project.ipynb` | Google Colab notebook: data loading, feature extraction, CNN training and evaluation (course version) |
+| `HeartSound_Course.ipynb` | **Course version** (Google Colab): data loading, 3-channel feature extraction, CNN training and evaluation, as submitted for the course |
+| `HeartSound_Reaudit.ipynb` | **Re-audit**: the same model with leak-free evaluation (augmentation on training data only, patient-level `StratifiedGroupKFold`, separate early-stopping patients, 20% patient hold-out test set) |
 
 ## How to run
 
